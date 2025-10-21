@@ -50,7 +50,7 @@ pipeline_generico/
 
 ```bash
 # Clonar o descargar el repositorio
-git clone <tu-repo>
+git clone <limpiador-csv-generico>
 cd pipeline_generico
 ```
 
@@ -258,6 +258,7 @@ Este proyecto está bajo licencia MIT.
 ## 📞 Soporte
 
 Para problemas o sugerencias, revisa los logs en `dataset_cleaning.log` o abre un issue en el repositorio.
+Contacto: analista.marcelo.olea@gmail.com
 
 ---
 
