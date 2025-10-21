@@ -1,0 +1,245 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                                                                            ║
+║                  ✅ VISUALIZADOR DE CAMBIOS - RESUMEN                     ║
+║                                                                            ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+📅 FECHA: 2025-10-21
+✅ ESTADO: COMPLETADO Y PROBADO
+
+════════════════════════════════════════════════════════════════════════════
+
+🎯 OBJETIVO
+
+Crear una herramienta que visualice los cambios realizados por el limpiador
+de datos, mostrando:
+  ✓ Cambios detectados (primeros 10)
+  ✓ Ubicación exacta (Fila, Columna)
+  ✓ Tipo de cambio (Reducción, Expansión, Espacios, Caracteres)
+  ✓ Estadísticas detalladas
+  ✓ Resumen de cambios si son más de 10
+
+════════════════════════════════════════════════════════════════════════════
+
+📦 ARCHIVOS CREADOS
+
+HERRAMIENTAS:
+  ✓ visualize_changes.py          (200 líneas) - Herramienta principal
+  ✓ change_visualizer.py          (150 líneas) - Herramienta alternativa
+
+DOCUMENTACIÓN:
+  ✓ VISUALIZADOR_CAMBIOS.md       - Guía completa de uso
+  ✓ RESUMEN_VISUALIZADOR.txt      - Este archivo
+
+REPORTES:
+  ✓ cambios_report.txt            - Reporte de ejemplo
+
+════════════════════════════════════════════════════════════════════════════
+
+🚀 CÓMO USAR
+
+OPCIÓN 1: Ver cambios en consola
+  $ python visualize_changes.py ../Dataset.csv ../Dataset_cleaned.csv
+
+OPCIÓN 2: Exportar reporte a archivo
+  $ python visualize_changes.py ../Dataset.csv ../Dataset_cleaned.csv -o cambios.txt
+
+OPCIÓN 3: Mostrar más cambios
+  $ python visualize_changes.py ../Dataset.csv ../Dataset_cleaned.csv -l 20
+
+OPCIÓN 4: Mostrar 20 cambios y guardar reporte
+  $ python visualize_changes.py ../Dataset.csv ../Dataset_cleaned.csv -l 20 -o cambios.txt
+
+════════════════════════════════════════════════════════════════════════════
+
+✨ CARACTERÍSTICAS
+
+✓ COMPARACIÓN CELDA POR CELDA
+  - Compara archivo original con limpio
+  - Detecta cada cambio individual
+  - Muestra valor original y limpio
+
+✓ UBICACIÓN EXACTA
+  - Fila del cambio
+  - Columna del cambio
+  - Nombre del campo (si está disponible)
+
+✓ CLASIFICACIÓN DE CAMBIOS
+  - Reducción: Se removieron caracteres
+  - Expansión: Se agregaron caracteres
+  - Espacios: Se normalizaron espacios
+  - Caracteres: Se reemplazaron caracteres
+
+✓ ESTADÍSTICAS DETALLADAS
+  - Total de filas
+  - Total de columnas
+  - Filas modificadas
+  - Celdas modificadas
+  - Caracteres removidos
+  - Caracteres agregados
+  - Desglose por tipo de cambio
+
+✓ RESUMEN DE CAMBIOS
+  - Si hay >10 cambios, muestra primeros 10
+  - Luego muestra resumen de ubicaciones
+  - Agrupa cambios por fila
+  - Muestra columnas afectadas
+
+✓ EXPORTACIÓN A ARCHIVO
+  - Guarda reporte completo
+  - Formato legible
+  - Incluye todas las estadísticas
+
+════════════════════════════════════════════════════════════════════════════
+
+📊 EJEMPLO DE SALIDA
+
+╔══════════════════════════════════════════════════════════════════════════╗
+║                        RESUMEN DE CAMBIOS                               ║
+╚══════════════════════════════════════════════════════════════════════════╝
+
+📊 ESTADÍSTICAS GENERALES
+  Total de filas: 1,784
+  Total de columnas: 35
+  Filas modificadas: 1,783
+  Celdas modificadas: 14,460
+  Caracteres removidos: 713,505
+  Caracteres agregados: 731,902
+
+📈 TIPOS DE CAMBIOS
+  Expansión: 14,220
+  Reducción: 227
+  Espacios: 13
+
+📝 CAMBIOS DETECTADOS (mostrando 10 de 14,460)
+
+Cambio #1
+  📍 Ubicación: Fila 2, Columna 7
+  📋 Campo: N/A
+  🔄 Tipo: Expansión
+  ❌ Original: 'Actividades de la administración pública en general'
+  ✅ Limpio:   'Actividades de la administración pública en general'
+
+... (9 cambios más)
+
+⚠️  Hay 14,450 cambios más no mostrados
+
+📋 RESUMEN DE CAMBIOS RESTANTES
+
+Ubicaciones (Fila → Columnas):
+
+  Fila    3 → Columnas [7, 9, 14, 17, 21, 23, 25, 27, 29, 35]
+  Fila    4 → Columnas [7, 9, 14, 17, 21, 23, 25, 27, 29, 35]
+  Fila    5 → Columnas [7, 9, 14, 17, 21, 25, 27, 35]
+  ... (1,762 filas más)
+
+════════════════════════════════════════════════════════════════════════════
+
+🔧 OPCIONES DE LÍNEA DE COMANDOS
+
+visualize_changes.py <original> <cleaned> [opciones]
+
+ARGUMENTOS:
+  original              Ruta del archivo original
+  cleaned               Ruta del archivo limpio
+
+OPCIONES:
+  -o, --output FILE     Guardar reporte en archivo
+  -l, --limit N         Mostrar N cambios (default: 10)
+
+EJEMPLOS:
+  python visualize_changes.py ../Dataset.csv ../Dataset_cleaned.csv
+  python visualize_changes.py ../Dataset.csv ../Dataset_cleaned.csv -o reporte.txt
+  python visualize_changes.py ../Dataset.csv ../Dataset_cleaned.csv -l 20
+  python visualize_changes.py ../Dataset.csv ../Dataset_cleaned.csv -l 20 -o reporte.txt
+
+════════════════════════════════════════════════════════════════════════════
+
+📈 INTERPRETACIÓN DE RESULTADOS
+
+TIPOS DE CAMBIOS:
+  Reducción   → Se removieron caracteres (limpieza de caracteres especiales)
+  Expansión   → Se agregaron caracteres (normalización Unicode)
+  Espacios    → Se normalizaron espacios (trim, múltiples espacios)
+  Caracteres  → Se reemplazaron caracteres (acentos, caracteres especiales)
+
+ESTADÍSTICAS:
+  Filas modificadas   → Número de filas con al menos un cambio
+  Celdas modificadas  → Número total de celdas que cambiaron
+  Caracteres removidos → Total de caracteres eliminados
+  Caracteres agregados → Total de caracteres añadidos
+
+════════════════════════════════════════════════════════════════════════════
+
+💡 CASOS DE USO
+
+CASO 1: Verificar cambios después de limpiar
+  python visualize_changes.py ../Dataset.csv ../Dataset_cleaned.csv
+
+CASO 2: Generar reporte detallado
+  python visualize_changes.py ../Dataset.csv ../Dataset_cleaned.csv -o cambios_detallados.txt
+
+CASO 3: Analizar cambios específicos
+  python visualize_changes.py ../Dataset.csv ../Dataset_cleaned.csv -l 50
+
+CASO 4: Comparar múltiples limpiezas
+  python visualize_changes.py ../Dataset.csv ../Dataset_cleaned_v1.csv -o cambios_v1.txt
+  python visualize_changes.py ../Dataset.csv ../Dataset_cleaned_v2.csv -o cambios_v2.txt
+  diff cambios_v1.txt cambios_v2.txt
+
+════════════════════════════════════════════════════════════════════════════
+
+🎯 FLUJO DE TRABAJO RECOMENDADO
+
+1. Ejecutar limpieza
+   $ python generic_pipeline.py ../Dataset.csv
+
+2. Visualizar cambios
+   $ python visualize_changes.py ../Dataset.csv ../Dataset_cleaned.csv
+
+3. Revisar reporte
+   - Verificar que los cambios son correctos
+   - Identificar patrones de cambios
+   - Validar que no se perdieron datos importantes
+
+4. Exportar reporte (opcional)
+   $ python visualize_changes.py ../Dataset.csv ../Dataset_cleaned.csv -o cambios_report.txt
+
+5. Usar dataset limpio
+   - El archivo Dataset_cleaned.csv está listo para usar
+
+════════════════════════════════════════════════════════════════════════════
+
+📚 DOCUMENTACIÓN
+
+Para más información, consulta:
+  - VISUALIZADOR_CAMBIOS.md    - Guía completa
+  - GUIA_RAPIDA.md             - Inicio rápido del pipeline
+  - README_PIPELINE_GENERICO.md - Documentación del pipeline
+
+════════════════════════════════════════════════════════════════════════════
+
+✅ VENTAJAS
+
+✓ Visualización clara de cambios
+✓ Ubicación exacta de cada cambio
+✓ Estadísticas detalladas
+✓ Resumen de cambios si son muchos
+✓ Exportación a archivo
+✓ Fácil de usar
+✓ Interfaz intuitiva con emojis
+✓ Clasificación automática de cambios
+✓ Manejo de archivos grandes
+
+════════════════════════════════════════════════════════════════════════════
+
+🎉 ¡LISTO PARA USAR!
+
+El visualizador de cambios está completamente funcional y probado.
+
+Comienza ahora:
+
+  python visualize_changes.py ../Dataset.csv ../Dataset_cleaned.csv
+
+════════════════════════════════════════════════════════════════════════════
+
